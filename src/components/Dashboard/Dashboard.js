@@ -66,7 +66,7 @@ export default function Dashboard() {
     <Header />
       
       
-    <TableContainer component={Paper} style={{width: 700}} >
+    <TableContainer component={Paper} style={{width: 700,marginTop: 82}} >
     <Grid xs={12} lg={12} md={12} item>
         <SearchApp xs={12} setSearchTerm={setSearchTerm} searchTerm={searchTerm} />
       </Grid>
