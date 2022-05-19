@@ -59,7 +59,7 @@ export default function SearchApp({setSearchTerm, searchTerm}) {
 
 
   return (
-    <Box sx={{ flexGrow: 1 }} style={{marginBottom: 10}}>
+    <Box sx={{ flexGrow: 1 }} style={{marginBottom: 10, width: 'inherit'}}>
       <AppBar position="static">
         <Toolbar>
           <IconButton

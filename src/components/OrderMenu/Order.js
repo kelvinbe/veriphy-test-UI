@@ -91,7 +91,7 @@ export default function OrderMenus() {
         onClick={handleClick}
         endIcon={<KeyboardArrowDownIcon />}
       >
-        Order By:
+        Order:
       </Button>
       <StyledMenu
         id="demo-customized-menu"

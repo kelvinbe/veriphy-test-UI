@@ -61,13 +61,13 @@ export default function Dashboard() {
   console.log('results', results)
 
   return (
-    <Grid container style={{display: 'flex', justifyContent: 'center', alignItems: 'center', alignContent: 'center', height: '100vh'}}>
-      <Grid item style={{}}>
-      <Grid item>
-        <SearchApp setSearchTerm={setSearchTerm} searchTerm={searchTerm} />
-      </Grid>
-      <Grid item>
+    <Grid container style={{display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh'}}>
+      
+      
     <TableContainer component={Paper} style={{width: 700}} >
+    <Grid xs={12} lg={12} md={12} item>
+        <SearchApp xs={12} setSearchTerm={setSearchTerm} searchTerm={searchTerm} />
+      </Grid>
       <Table sx={{ minWidth: 500 }} aria-label="customized table">
         <TableHead>
           <TableRow>
@@ -102,8 +102,6 @@ export default function Dashboard() {
         </TableBody>
       </Table>
     </TableContainer>
-    </Grid>
-    </Grid>
     </Grid>
   );
 }
