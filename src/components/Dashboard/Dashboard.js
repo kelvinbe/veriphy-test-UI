@@ -11,6 +11,7 @@ import Grid from '@mui/material/Grid';
 import SearchApp from './Search';
 import { getUsers } from '../Auth';
 import { useDispatch, useSelector } from 'react-redux';
+import Header from './header';
 
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -62,6 +63,7 @@ export default function Dashboard() {
 
   return (
     <Grid container style={{display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh'}}>
+    <Header />
       
       
     <TableContainer component={Paper} style={{width: 700}} >

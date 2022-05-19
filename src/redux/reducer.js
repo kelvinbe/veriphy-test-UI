@@ -7,7 +7,6 @@ const rootReducer = (state = initialState, action) => {
   switch (action.type) {
     case "ORDER_BY_TIME":
       console.log('dataaaaa', action?.data)
-
       return { users: action.data };
     case "ORDER_BY_NAME":
       return { users: action.data };
