@@ -59,7 +59,7 @@ export default function Dashboard() {
   }, [dispatch])
 
   if(!results) return null
-  console.log('results', results)
+  console.log('resultsss', results)
 
   return (
     <Grid container style={{display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh'}}>
