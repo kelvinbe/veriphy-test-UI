@@ -8,7 +8,7 @@ import Button from '@mui/material/Button';
 import {useDispatch} from 'react-redux'
 import { useNavigate } from 'react-router-dom';
 import {signUp, signIn} from '../Auth'
-import { Alert } from '@mui/material';
+import { Alert, Stack } from '@mui/material';
 
 
 const AddUser = () => {
@@ -20,10 +20,23 @@ const AddUser = () => {
     const [isSignUp, setIsSignUp] = useState(false)
     const [FormErrors, setFormErrors] = useState({})
     const [isSubmit, setIsSubmit] = useState(false)
-    const [alert, setAlert] = useState(true)
+    const [alert, setAlert] = useState('')
+    const [alertt, setAlertt] = useState(false)
+
 
     const dispatch = useDispatch()
     const navigate = useNavigate()
+
+    const BasicAlerts = (props) => {
+
+  
+        return (
+          <Stack sx={{ width: '100%' }} spacing={2}>
+      
+            <Alert severity="warning">Something is wrong</Alert>
+          </Stack>
+        );
+      }
 
     const handleSubmit = async (e) => {
         e.preventDefault()
@@ -36,7 +49,13 @@ const AddUser = () => {
         navigate('/dashboard')
             
         } catch (error) {
-            alert(error.response.data.message)
+            console.log(error)
+            setAlertt(true)
+            setAlert(error.response.data.message)
+
+            setTimeout(() => {
+                setAlertt(false)
+            }, 3000)
 
         }   
         
@@ -115,6 +134,7 @@ const AddUser = () => {
                 <h2 style={headerStyle}>Add User</h2>
                 <Typography gutterBottom variant='caption'>
                     Add a new user
+                   {alertt && <p style={{color: 'red', fontSize: 12}}>{alert}</p> }
                 </Typography>
 
                 </Grid>

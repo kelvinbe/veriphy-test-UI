@@ -8,6 +8,8 @@ import Button from '@mui/material/Button';
 import {useDispatch} from 'react-redux'
 import { useNavigate } from 'react-router-dom';
 import {signUp, signIn} from './Auth'
+import Alert from '@mui/material/Alert';
+import Stack from '@mui/material/Stack';
 
 
 const SignUp = () => {
@@ -21,6 +23,19 @@ const SignUp = () => {
     const [isSubmit, setIsSubmit] = useState(false)
     const dispatch = useDispatch()
     const navigate = useNavigate()
+    const [alert, setAlert] = useState('')
+    const [alertt, setAlertt] = useState(false)
+
+    const BasicAlerts = (props) => {
+
+  
+        return (
+          <Stack sx={{ width: '100%' }} spacing={2}>
+      
+            <Alert severity="warning">Something is wrong</Alert>
+          </Stack>
+        );
+      }
 
     const handleSubmit = async (e) => {
         e.preventDefault()
@@ -37,7 +52,12 @@ const SignUp = () => {
             setIsSignUp(false)
                 
             } catch (error) {
-                alert(error.response.data.message)
+                setAlertt(true)
+            setAlert(error.response.data.message)
+
+            setTimeout(() => {
+                setAlertt(false)
+            }, 3000)
             }
             
         }else{
@@ -125,6 +145,9 @@ const SignUp = () => {
                 <h2 style={headerStyle}>{isSignUp ? 'Sign Up' : 'Sign In'}</h2>
                 <Typography gutterBottom variant='caption'>
               { isSignUp ? 'Please fill this form to create an account' : 'Please Sign In'}
+              {alertt && <p style={{color: 'red', fontSize: 12}}>{alert}</p> }
+                
+
                 </Typography>
 
                 </Grid>

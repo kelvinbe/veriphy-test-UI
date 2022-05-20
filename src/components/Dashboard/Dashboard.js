@@ -16,6 +16,7 @@ import { useNavigate } from 'react-router-dom';
 import { NavigateBefore } from '@mui/icons-material';
 
 
+
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
     backgroundColor: theme.palette.common.black,
@@ -44,9 +45,13 @@ export default function Dashboard() {
   const results = useSelector((state) => state.users )
   const [searchTerm, setSearchTerm] = useState('')
   const navigate = useNavigate()
+  const user = localStorage.getItem('profile')
+
+
+  
+
 
   useEffect(() => {
-    const user = localStorage.getItem('profile')
     if(!user){
       navigate('/')
     }
@@ -72,7 +77,7 @@ export default function Dashboard() {
     <Grid container style={{display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh'}}>
     <Header />
       
-      
+      <h2>Welcome {user.name}</h2>
     <TableContainer component={Paper} style={{width: 700,marginTop: 82}} >
     <Grid xs={12} lg={12} md={12} item>
         <SearchApp xs={12} setSearchTerm={setSearchTerm} searchTerm={searchTerm} />
