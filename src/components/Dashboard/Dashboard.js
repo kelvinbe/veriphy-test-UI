@@ -12,6 +12,8 @@ import SearchApp from './Search';
 import { getUsers } from '../Auth';
 import { useDispatch, useSelector } from 'react-redux';
 import Header from './header';
+import { useNavigate } from 'react-router-dom';
+import { NavigateBefore } from '@mui/icons-material';
 
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -41,8 +43,13 @@ export default function Dashboard() {
   const dispatch = useDispatch()
   const results = useSelector((state) => state.users )
   const [searchTerm, setSearchTerm] = useState('')
+  const navigate = useNavigate()
 
   useEffect(() => {
+    const user = localStorage.getItem('profile')
+    if(!user){
+      navigate('/')
+    }
 
     const FetchData = async () => {
       try {

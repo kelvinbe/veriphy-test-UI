@@ -7,10 +7,11 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import {useDispatch} from 'react-redux'
 import { useNavigate } from 'react-router-dom';
-import {signUp, signIn} from './Auth'
+import {signUp, signIn} from '../Auth'
+import { Alert } from '@mui/material';
 
 
-const SignUp = () => {
+const AddUser = () => {
 
     const [showPassword, setShowPassword] = useState(false)
     const  initalState = {firstName: '', lastName: '', email: '', phone: '', password: '', confirmPassword: ''} 
@@ -19,34 +20,28 @@ const SignUp = () => {
     const [isSignUp, setIsSignUp] = useState(false)
     const [FormErrors, setFormErrors] = useState({})
     const [isSubmit, setIsSubmit] = useState(false)
+    const [alert, setAlert] = useState(true)
+
     const dispatch = useDispatch()
     const navigate = useNavigate()
 
     const handleSubmit = async (e) => {
         e.preventDefault()
-        setIsSubmit(true)
+
+        try {
         setFormErrors(validate(FormData))
 
-
-        if(isSignUp){
-            try {
-                const data = await signUp(FormData)
-
-            setIsSubmit(true)
-            dispatch({type: "GET_USER_AUTH", data})
-            setIsSignUp(false)
-                
-            } catch (error) {
-                alert(error.response.data.message)
-            }
+        const data = await signUp(FormData)
+        dispatch({type: "GET_USER_AUTH", data})
+        navigate('/dashboard')
             
-        }else{
-            const data = await signIn(FormData)
-            setFormErrors(validate(FormData))
+        } catch (error) {
+            alert(error.response.data.message)
 
-            dispatch({type: "GET_USER_AUTH", data})
-            navigate('/dashboard')
-        }
+        }   
+        
+
+        
         console.log(FormData)
     }
 
@@ -100,12 +95,7 @@ const SignUp = () => {
     ]
 
     useEffect(() => {
-        const user = localStorage.getItem('profile')
-        console.log('user', user)
-        if(!user){
-            setIsSignUp(true)
-        }
-
+        console.log(FormErrors)
         if(Object.keys(FormErrors).length === 0 && isSubmit){
             console.log(FormData)
         }
@@ -122,9 +112,9 @@ const SignUp = () => {
                     <Avatar style={avatarStyle}>
 
                     </Avatar>
-                <h2 style={headerStyle}>{isSignUp ? 'Sign Up' : 'Sign In'}</h2>
+                <h2 style={headerStyle}>Add User</h2>
                 <Typography gutterBottom variant='caption'>
-              { isSignUp ? 'Please fill this form to create an account' : 'Please Sign In'}
+                    Add a new user
                 </Typography>
 
                 </Grid>
@@ -132,7 +122,6 @@ const SignUp = () => {
 
                
                 <form onSubmit={handleSubmit}>
-                {isSignUp && (
                     <>
                     <TextField type='text' name='firstName' fullWidth label='First Name' variant='standard' placeholder='Enter your name' onChange={handleChange}/>
                     <p style={{textAlign: 'initial', color: 'red', fontSize: 12}}>{FormErrors.firstName}</p>
@@ -143,30 +132,20 @@ const SignUp = () => {
                     <p style={{textAlign: 'initial', color: 'red', fontSize: 12}}>{FormErrors.phone}</p>
 
                     </>
-                    )}
                     <TextField type='email' name='email' fullWidth label='Email' variant='standard' placeholder='Enter your email' onChange={handleChange}/>
                     <p style={{textAlign: 'initial', color: 'red', fontSize: 12}}>{FormErrors.email}</p>
 
                     <TextField type='password' name='password' fullWidth label='Password' variant='standard' placeholder='Enter your password' onChange={handleChange}/>
                     <p style={{textAlign: 'initial', color: 'red', fontSize: 12}}>{FormErrors.password}</p>
 
-                  { isSignUp && <TextField type='password' name='confirmPassword' fullWidth label='Confirm Passoword' variant='standard' placeholder='Confirm your password' onChange={handleChange}/>
+                  <TextField type='password' name='confirmPassword' fullWidth label='Confirm Passoword' variant='standard' placeholder='Confirm your password' onChange={handleChange}/>
 
-                  }
-                    {isSignUp && <p style={{textAlign: 'initial', color: 'red', fontSize: 12}}>{FormErrors.confirmPassword}</p> }
-                   
+                    <p style={{textAlign: 'initial', color: 'red', fontSize: 12}}>{FormErrors.confirmPassword}</p> 
+                   <Grid style={{textAlign: 'center'}}>
                     <Button style={{marginTop: 20 }} type='submit' variant='contained' color='primary'>
-                       {isSignUp ? 'Sign Up' : 'Sign In'}
-                    </Button>
-
-                    <Grid container justify='flex-end'>
-                        <Grid item>
-                    <Button onClick={switchMode}>
-                        {isSignUp ? 'Already have an account? Sign In': "Don't have an account? Sign Up"}
+                       Add User
                     </Button>
                     </Grid>
-                    </Grid>
-
                 </form>
 
             </Paper>
@@ -178,4 +157,4 @@ const SignUp = () => {
 
 
 
-export default SignUp
+export default AddUser

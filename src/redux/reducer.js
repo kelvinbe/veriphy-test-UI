@@ -12,6 +12,9 @@ const rootReducer = (state = initialState, action) => {
       return { users: action.data };
     case "GET_USERS":
       return { users: action?.data };
+    case "LOGOUT":
+      localStorage.clear()
+      return { users: null };
     case "GET_USER_AUTH":
         localStorage.setItem('profile', JSON.stringify({ ...action?.data.result}))
         console.log('actionsss', action?.data)

@@ -5,15 +5,22 @@ import MenuIcon from "@mui/icons-material/Menu";
 import Button from "@mui/material/Button";
 import { Link as RouterLink } from "react-router-dom";
 import { Link } from "react-router-dom";
-
+import {useDispatch} from 'react-redux'
 import "./header.css";
 import Drawer from "@mui/material/Drawer";
+import { useNavigate } from 'react-router-dom';
+
 
 const Header = () => {
   const [state, setState] = useState({
     mobileView: false,
     drawerOpen: false,
   });
+
+  const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')))
+
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
 
   const { mobileView, drawerOpen } = state;
 
@@ -24,13 +31,17 @@ const Header = () => {
     },
     {
         label: "Add User",
-        href: "/",
+        href: "/add",
       },
-    {
-      label: "Log Out",
-      href: "/logout",
-    },
   ];
+
+  const handleLogout = () => {
+    dispatch({type: 'LOGOUT'})
+    navigate('/')
+    setUser(null)
+    
+    
+  }
 
   useEffect(() => {
     const setResponsiveness = () => {
@@ -46,6 +57,11 @@ const Header = () => {
       window.removeEventListener("resize", () => setResponsiveness());
     };
   }, []);
+
+
+  useEffect(() => {
+    const token = user?.token
+  })
 
   const getMenuButtons = () => {
     return headersData.map(({ label, href }) => {
@@ -134,6 +150,7 @@ const Header = () => {
           </div>
           <div>
         {getMenuButtons()}
+        <Button onClick={handleLogout}>Logout</Button>
         </div>
       </Toolbar>
     );

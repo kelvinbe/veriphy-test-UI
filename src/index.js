@@ -11,6 +11,7 @@ import {
   Route,
 } from "react-router-dom";
 import Dashboard from './components/Dashboard/Dashboard';
+import AddUser from './components/Dashboard/AddUser';
 
 
 
@@ -21,6 +22,8 @@ root.render(
     <Routes>
     <Route  path="/" element={<App />} />
     <Route  path="/dashboard" element={<Dashboard />} />
+    <Route  path="/add" element={<AddUser />} />
+
 
     </Routes>
     </BrowserRouter>
