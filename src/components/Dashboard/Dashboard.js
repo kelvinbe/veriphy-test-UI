@@ -46,7 +46,7 @@ export default function Dashboard() {
   const [searchTerm, setSearchTerm] = useState('')
   const navigate = useNavigate()
   const user = localStorage.getItem('profile')
-
+  console.log('user', user['name'])
 
   
 
@@ -77,8 +77,9 @@ export default function Dashboard() {
     <Grid container style={{display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh'}}>
     <Header />
       
-      <h2>Welcome {user.name}</h2>
     <TableContainer component={Paper} style={{width: 700,marginTop: 82}} >
+    <h2>Welcome {results[0].name}</h2>
+
     <Grid xs={12} lg={12} md={12} item>
         <SearchApp xs={12} setSearchTerm={setSearchTerm} searchTerm={searchTerm} />
       </Grid>
