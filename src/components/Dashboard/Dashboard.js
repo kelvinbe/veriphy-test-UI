@@ -53,8 +53,8 @@ export default function Dashboard() {
   const name = "name"
 
   const handleClickOpen = () => {
-    setShowDialog(true)
-    setOpen(true);
+    // setShowDialog(true)
+    // setOpen(true);
   };
 
   const handleClose = () => {
