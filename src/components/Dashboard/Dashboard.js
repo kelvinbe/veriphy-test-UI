@@ -13,7 +13,7 @@ import { getUsers } from '../Auth';
 import { useDispatch, useSelector } from 'react-redux';
 import Header from './header';
 import { useNavigate } from 'react-router-dom';
-import { NavigateBefore } from '@mui/icons-material';
+import DialogSlide from '../Dialog/Dialog';
 
 
 
@@ -47,9 +47,23 @@ export default function Dashboard() {
   const navigate = useNavigate()
   const user = localStorage.getItem('profile')
   console.log('user', user['name'])
+  const [showDialog, setShowDialog] = useState(false)
+  const [open, setOpen] = React.useState(false);
+  const userUsed = JSON.parse(user)
+  const name = "name"
+
+  const handleClickOpen = () => {
+    setShowDialog(true)
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    console.log('i was hit')
+    setOpen(false)
+    setShowDialog(false)
+};
 
   
-
 
   useEffect(() => {
     if(!user){
@@ -78,8 +92,7 @@ export default function Dashboard() {
     <Header />
       
     <TableContainer component={Paper} style={{width: 700,marginTop: 82}} >
-    <h2>Welcome {results[0].name}</h2>
-
+    <h2>Welcome {userUsed[name]}</h2>
     <Grid xs={12} lg={12} md={12} item>
         <SearchApp xs={12} setSearchTerm={setSearchTerm} searchTerm={searchTerm} />
       </Grid>
@@ -104,14 +117,15 @@ export default function Dashboard() {
               return user
             }
           }).map((user) => (
-            <StyledTableRow key={user._id}>
+            <StyledTableRow key={user._id} onClick={handleClickOpen}>
               <StyledTableCell component="th" scope="row">
                 {user.name}
               </StyledTableCell>
               <StyledTableCell align="right">{user.email}</StyledTableCell>
               <StyledTableCell align="right">{user.phone}</StyledTableCell>
               <StyledTableCell align="right">{user.createdAt}</StyledTableCell>
-
+          {showDialog && <DialogSlide open={open} handleClose={handleClose} />}
+              
             </StyledTableRow>
           ))}
         </TableBody>

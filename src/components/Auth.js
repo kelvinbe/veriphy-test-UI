@@ -4,6 +4,7 @@ import { axiosInstance } from "../config";
 const API = axios.create({ baseURL: "http://localhost:5000" });
 
 
+
 export const signIn = async (FormData) => {
   const get = await (await axiosInstance.post("/user/signin", FormData)).data
       console.log('gettt', get)
@@ -15,6 +16,8 @@ export const signUp = async (FormData) => {
  console.log('gettt', get)
   return get
 };
+
+export const deleteUser = (id) => API.delete(`/user/${id}`)
 
 
 export const getUsers = async () => {

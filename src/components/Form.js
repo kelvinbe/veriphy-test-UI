@@ -65,7 +65,7 @@ const SignUp = () => {
             setFormErrors(validate(FormData))
 
             dispatch({type: "GET_USER_AUTH", data})
-            navigate('/dashboard')
+            navigate('/home')
         }
         console.log(FormData)
     }
@@ -154,7 +154,7 @@ const SignUp = () => {
                
 
                
-                <form onSubmit={handleSubmit}>
+                <form onSubmit={handleSubmit} style={{textAlign: 'center'}}>
                 {isSignUp && (
                     <>
                     <TextField type='text' name='firstName' fullWidth label='First Name' variant='standard' placeholder='Enter your name' onChange={handleChange}/>

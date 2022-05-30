@@ -27,11 +27,15 @@ const Header = () => {
   const headersData = [
     {
       label: "Home",
-      href: "/dashboard",
+      href: "/home",
     },
     {
         label: "Add User",
         href: "/add",
+      },
+      {
+        label: "Dashboard",
+        href: "/dashboard",
       },
   ];
 
