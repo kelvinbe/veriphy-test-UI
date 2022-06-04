@@ -10,6 +10,7 @@ export const signIn = async (FormData) => {
       console.log('gettt', get)
   return get
 };
+
 export const signUp = async (FormData) => {
  const get = await (await axiosInstance.post("/user/signup", FormData)).data
 

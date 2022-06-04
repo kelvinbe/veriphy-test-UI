@@ -13,7 +13,17 @@ import { getUsers } from '../Auth';
 import { useDispatch, useSelector } from 'react-redux';
 import Header from './header';
 import { useNavigate } from 'react-router-dom';
-import DialogSlide from '../Dialog/Dialog';
+import Button from '@mui/material/Button';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
+import Slide from '@mui/material/Slide';
+
+const Transition = React.forwardRef(function Transition(props, ref) {
+  return <Slide direction="up" ref={ref} {...props} />;
+});
 
 
 
@@ -39,31 +49,69 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 
 
 
+
+
+
+
+
 export default function Dashboard() {
 
   const dispatch = useDispatch()
-  const results = useSelector((state) => state.users )
+  const results = useSelector((state) => state.users)
   const [searchTerm, setSearchTerm] = useState('')
   const navigate = useNavigate()
   const user = localStorage.getItem('profile')
   console.log('user', user['name'])
   const [showDialog, setShowDialog] = useState(false)
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
   const userUsed = JSON.parse(user)
   const name = "name"
-
   const handleClickOpen = () => {
-    // setShowDialog(true)
-    // setOpen(true);
+   
   };
+
+
+
+const DialogSlide = () => {
+
+  
 
   const handleClose = () => {
     console.log('i was hit')
+    console.log('show', setShowDialog(false))
+
     setOpen(false)
-    setShowDialog(false)
 };
 
-  
+return (
+  <div>
+      <Dialog
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">
+          {"Use Google's location service?"}
+        </DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+            Let Google help apps determine location. This means sending anonymous
+            location data to Google, even when no apps are running.
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose}>Disagree</Button>
+          <Button onClick={handleClose} autoFocus>
+            Agree
+          </Button>
+        </DialogActions>
+      </Dialog>
+  </div>
+);
+}
+
+  console.log('open', open)
 
   useEffect(() => {
     if(!user){
@@ -124,7 +172,7 @@ export default function Dashboard() {
               <StyledTableCell align="right">{user.email}</StyledTableCell>
               <StyledTableCell align="right">{user.phone}</StyledTableCell>
               <StyledTableCell align="right">{user.createdAt}</StyledTableCell>
-          {showDialog && <DialogSlide open={open} handleClose={handleClose} />}
+          {showDialog && <DialogSlide />}
               
             </StyledTableRow>
           ))}

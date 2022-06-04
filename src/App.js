@@ -1,5 +1,5 @@
 import './App.css';
-import React from 'react';
+import React, { useState } from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
@@ -19,12 +19,22 @@ import {TooltipComponent} from '@syncfusion/ej2-react-popups'
 import {Footer, Sidebar} from './components'
 import {Stacked, Pyramid, Area, Bar, Pie, Line, Home} from './pages'
 import Header from './components/Dashboard/header';
+import Skeletonn from './components/Skeleton/Skeleton';
 
 function App() {
 
+  setTimeout(() => {
+    setIsLoading(true)
+  }, 5000)
+
+  const [isLoading, setIsLoading] = useState(false)
+
   return (
     <div className="App">
-    <SignUp />
+      {isLoading ? 
+    <SignUp />:
+     <Skeletonn />
+      }
   </div>
 
   );

@@ -138,9 +138,6 @@ const AddUser = () => {
                 </Typography>
 
                 </Grid>
-               
-
-               
                 <form onSubmit={handleSubmit}>
                     <>
                     <TextField type='text' name='firstName' fullWidth label='First Name' variant='standard' placeholder='Enter your name' onChange={handleChange}/>
