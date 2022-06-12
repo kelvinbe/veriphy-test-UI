@@ -35,7 +35,7 @@ const Header = () => {
       },
       {
         label: "Dashboard",
-        href: "/dashboard",
+        href: "/user",
       },
   ];
 

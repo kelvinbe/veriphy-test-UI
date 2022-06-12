@@ -18,7 +18,16 @@ export const signUp = async (FormData) => {
   return get
 };
 
-export const deleteUser = (id) => API.delete(`/user/${id}`)
+export const deleteUser = (id) => axiosInstance.delete(`/user/${id}`, {
+  headers: {
+    'Content-Type': 'application/json'
+  },
+  params: {
+    id: id
+  }
+}).then(resp => {
+  return resp
+})
 
 
 export const getUsers = async () => {

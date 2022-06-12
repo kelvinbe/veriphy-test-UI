@@ -28,11 +28,9 @@ root.render(
    <BrowserRouter>
     <Routes>
     <Route  path="/" element={<App />} />
-    <Route  path="/dashboard" element={<Dashboard />} />
+    <Route  path="/user" element={<Dashboard />} />
     <Route  path="/add" element={<AddUser />} />
     <Route path='/home' element={<Home />} />
-
-
     </Routes>
     </BrowserRouter>
   </Provider>

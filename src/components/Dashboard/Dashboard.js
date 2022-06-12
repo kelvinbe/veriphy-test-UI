@@ -9,7 +9,7 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
 import SearchApp from './Search';
-import { getUsers } from '../Auth';
+import { getUsers, deleteUser } from '../Auth';
 import { useDispatch, useSelector } from 'react-redux';
 import Header from './header';
 import { useNavigate } from 'react-router-dom';
@@ -20,6 +20,10 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import Slide from '@mui/material/Slide';
+import Tour from 'reactour'
+import BasicAlerts from '../Alert/Alert';
+import { Alert } from '@mui/material';
+
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -48,71 +52,116 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 }));
 
 
-
-
-
-
-
-
 export default function Dashboard() {
 
   const dispatch = useDispatch()
   const results = useSelector((state) => state.users)
   const [searchTerm, setSearchTerm] = useState('')
   const navigate = useNavigate()
+  const [isTourOpen, setIsTourOpen] = useState(true)
   const user = localStorage.getItem('profile')
   console.log('user', user['name'])
   const [showDialog, setShowDialog] = useState(false)
   const [open, setOpen] = useState(false);
+  const [text, setText] = useState('')
+  const [alert, setAlert] = useState(false)
   const userUsed = JSON.parse(user)
   const name = "name"
+  const steps = [
+    {
+      selector: '.first-step',
+      content: 'Welcome to the dashboard',
+    },
+    {
+      selector: '.second-step',
+      content: 'You can search for a particular user on the search bar',
+    },
+    {
+      selector: '.third-step',
+      content: 'You can order by date or by name',
+    }, 
+    {
+      selector: '.fourth-step',
+      content: 'You can delete a user by clicking on the delete button in the table',
+    },
+    // ...
+  ]
   const handleClickOpen = () => {
-   
+    console.log('i was reached')
+   setOpen(true)
+   setShowDialog(true)
+
   };
 
+  const closeTour = () => {
+    setIsTourOpen(false)
+  }
 
 
-const DialogSlide = () => {
+  const RenderTour = () => {
+    return (
+      <Tour
+        steps={steps}
+        isOpen={isTourOpen}
+        onRequestClose={closeTour} />
+    )
+  }
 
+
+  const deleteUsers = async (id) => {
+    const del = await deleteUser(id)
+    console.log('delete', typeof del.data.message)
+    setText(del.data.message)
+    setAlert(true)
+    setTimeout(() => {
+    setAlert(false)
+    
+
+    }, 3000)
+    const users = await getUsers()
+    dispatch({type: 'GET_USERS', data: users})
+
+
+  }
+
+  console.log('textttt', text)
+ 
+
+
+// const DialogSlide = ({id}) => {
+//   results.filter(user => user._id === user._id)
+//   console.log('ID', id)
+// };
   
 
-  const handleClose = () => {
-    console.log('i was hit')
-    console.log('show', setShowDialog(false))
-
-    setOpen(false)
-};
-
-return (
-  <div>
-      <Dialog
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="alert-dialog-title"
-        aria-describedby="alert-dialog-description"
-      >
-        <DialogTitle id="alert-dialog-title">
-          {"Use Google's location service?"}
-        </DialogTitle>
-        <DialogContent>
-          <DialogContentText id="alert-dialog-description">
-            Let Google help apps determine location. This means sending anonymous
-            location data to Google, even when no apps are running.
-          </DialogContentText>
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleClose}>Disagree</Button>
-          <Button onClick={handleClose} autoFocus>
-            Agree
-          </Button>
-        </DialogActions>
-      </Dialog>
-  </div>
-);
-}
+// return (
+//   <div>
+//       <Dialog
+//         open={open}
+//         onClose={handleClose}
+//         aria-labelledby="alert-dialog-title"
+//         aria-describedby="alert-dialog-description"
+//       >
+//         <DialogTitle id="alert-dialog-title">
+//           {"Delete User?"}
+//         </DialogTitle>
+//         <DialogContent>
+//           <DialogContentText id="alert-dialog-description">
+//            Do you want to delete the following user
+//           </DialogContentText>
+//         </DialogContent>
+//         <DialogActions>
+//           <Button onClick={() => handleClose(user)}>Delete</Button>
+//           <Button onClick={handleClose} autoFocus>
+//             Close
+//           </Button>
+//         </DialogActions>
+//       </Dialog>
+//   </div>
+// );
+// }
 
   console.log('open', open)
-
   useEffect(() => {
     if(!user){
       navigate('/')
@@ -134,13 +183,14 @@ return (
 
   if(!results) return null
   console.log('resultsss', results)
-
+  console.log('showDialog', showDialog)
   return (
     <Grid container style={{display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh'}}>
     <Header />
       
     <TableContainer component={Paper} style={{width: 700,marginTop: 82}} >
     <h2>Welcome {userUsed[name]}</h2>
+    {alert && <BasicAlerts text={text} />}
     <Grid xs={12} lg={12} md={12} item>
         <SearchApp xs={12} setSearchTerm={setSearchTerm} searchTerm={searchTerm} />
       </Grid>
@@ -152,11 +202,13 @@ return (
             <StyledTableCell align="right">Email</StyledTableCell>
             <StyledTableCell align="right">Phone</StyledTableCell>
             <StyledTableCell align="right">Date Created</StyledTableCell>
+            <StyledTableCell align="right">Delete</StyledTableCell>
+
 
           </TableRow>
         </TableHead>
         <TableBody>
-          {results.filter(user => {
+          {results.length > 0 ? results.filter(user => {
             if(searchTerm === ""){
               return user
             }else if(
@@ -171,11 +223,13 @@ return (
               </StyledTableCell>
               <StyledTableCell align="right">{user.email}</StyledTableCell>
               <StyledTableCell align="right">{user.phone}</StyledTableCell>
-              <StyledTableCell align="right">{user.createdAt}</StyledTableCell>
-          {showDialog && <DialogSlide />}
-              
+              <StyledTableCell align="right">{user.createdAt} </StyledTableCell> 
+              <StyledTableCell align="right">
+                <Button variant="text" onClick={() => deleteUsers(user._id)}>Del</Button>
+                </StyledTableCell> 
             </StyledTableRow>
-          ))}
+          )): <div style={{display: 'flex', justifyContent: 'center'}}>No users! Head to Add User to populate table</div>}
+            {<RenderTour />}
         </TableBody>
       </Table>
     </TableContainer>

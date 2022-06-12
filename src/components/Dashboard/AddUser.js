@@ -46,7 +46,7 @@ const AddUser = () => {
 
         const data = await signUp(FormData)
         dispatch({type: "GET_USER_AUTH", data})
-        navigate('/dashboard')
+        navigate('/user')
             
         } catch (error) {
             console.log(error)
@@ -60,7 +60,7 @@ const AddUser = () => {
         }   
         
 
-        
+
         console.log(FormData)
     }
 
@@ -125,7 +125,7 @@ const AddUser = () => {
     const headerStyle = {margin:0}
     const avatarStyle = {backgroundColor: '#1bbd7e'}
     return (
-        <Grid>
+        <Grid style={{backgroundColor: 'beige', height: '100vh', display: 'flex', justifyContent: 'center'}}>
             <Paper elevation={20} style={paperStyle}>
                 <Grid align='center'>
                     <Avatar style={avatarStyle}>
