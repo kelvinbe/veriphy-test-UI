@@ -107,6 +107,8 @@ export default function Dashboard() {
     )
   }
 
+  console.log('hello')
+
 
   const deleteUsers = async (id) => {
     const del = await deleteUser(id)
