@@ -27,6 +27,8 @@ export const deleteUser = (id) => axiosInstance.delete(`/user/${id}`, {
   }
 }).then(resp => {
   return resp
+}).catch(error => {
+  console.error(error)
 })
 
 
