@@ -23,6 +23,7 @@ import Slide from '@mui/material/Slide';
 // import Tour from 'reactour'
 import BasicAlerts from '../Alert/Alert';
 import { Alert } from '@mui/material';
+import Pie from '../../pages/Charts/Pie'
 
 
 
@@ -190,7 +191,9 @@ export default function Dashboard() {
   return (
     <Grid container style={{display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh'}}>
     <Header />
-      
+    <Grid style={{display: 'flex'}}>
+      <Pie />
+      </Grid>
     <TableContainer component={Paper} style={{width: 700,marginTop: 82}} >
     <h2>Welcome {userUsed[name]}</h2>
     {alert && <BasicAlerts text={text} />}
