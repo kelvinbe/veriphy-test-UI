@@ -20,9 +20,10 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import Slide from '@mui/material/Slide';
-import Tour from 'reactour'
+// import Tour from 'reactour'
 import BasicAlerts from '../Alert/Alert';
 import { Alert } from '@mui/material';
+
 
 
 const Transition = React.forwardRef(function Transition(props, ref) {
@@ -98,14 +99,14 @@ export default function Dashboard() {
   }
 
 
-  const RenderTour = () => {
-    return (
-      <Tour
-        steps={steps}
-        isOpen={isTourOpen}
-        onRequestClose={closeTour} />
-    )
-  }
+  // const RenderTour = () => {
+  //   return (
+  //     <Tour
+  //       steps={steps}
+  //       isOpen={isTourOpen}
+  //       onRequestClose={closeTour} />
+  //   )
+  // }
 
   console.log('hello')
 
@@ -231,7 +232,6 @@ export default function Dashboard() {
                 </StyledTableCell> 
             </StyledTableRow>
           )): <div style={{display: 'flex', justifyContent: 'center'}}>No users! Head to Add User to populate table</div>}
-            {<RenderTour />}
         </TableBody>
       </Table>
     </TableContainer>
