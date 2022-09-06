@@ -49,7 +49,6 @@ const AddUser = () => {
         navigate('/user')
             
         } catch (error) {
-            console.log(error)
             setAlertt(true)
             setAlert(error.response.data.message)
 
@@ -61,7 +60,6 @@ const AddUser = () => {
         
 
 
-        console.log(FormData)
     }
 
     const validate = (values) => {
@@ -114,9 +112,7 @@ const AddUser = () => {
     ]
 
     useEffect(() => {
-        console.log(FormErrors)
         if(Object.keys(FormErrors).length === 0 && isSubmit){
-            console.log(FormData)
         }
     }, [FormErrors])
 

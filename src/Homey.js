@@ -1,5 +1,5 @@
 import './App.css';
-import React from 'react';
+import React, {useState} from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
@@ -19,9 +19,12 @@ import {TooltipComponent} from '@syncfusion/ej2-react-popups'
 import {Footer, Sidebar} from './components'
 import {Stacked, Pyramid, Area, Bar, Pie, Line, Home} from './pages'
 import Header from './components/Dashboard/header';
+import ReactJoyride from 'react-joyride';
 
 function Homey() {
 const activeMenu = true
+
+
 
 const user = localStorage.getItem('profile')
 
@@ -55,6 +58,7 @@ const user = localStorage.getItem('profile')
     <div>
       <div className='fixed md:static bg-main-bg dark:bg-main-dark-bg navbar w-full' >
        <Header /> 
+     
       </div>
 
     
@@ -62,6 +66,8 @@ const user = localStorage.getItem('profile')
 
       <div>
 
+    
+     
       </div>
 
       </div>

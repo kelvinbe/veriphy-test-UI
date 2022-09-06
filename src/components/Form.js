@@ -11,6 +11,7 @@ import { signUp, signIn } from "./Auth";
 import Alert from "@mui/material/Alert";
 import Stack from "@mui/material/Stack";
 import './Form.css'
+import CircularStatic from "../progress";
 
 const SignUp = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -34,6 +35,7 @@ const SignUp = () => {
   const [err, setErr] = useState(false);
   const [isLoading, setIsLoading] = useState(false)
 
+
   const BasicAlerts = (props) => {
     return (
       <Stack sx={{ width: "100%" }} spacing={2}>
@@ -45,10 +47,11 @@ const SignUp = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmit(true);
-    setFormErrors(validate(FormData));
 
     if (isSignUp) {
       try {
+        setFormErrors(validate(FormData));
+
         const data = await signUp(FormData);
 
         setIsSubmit(true);
@@ -66,9 +69,10 @@ const SignUp = () => {
       try {
         const data = await signIn(FormData);
         setFormErrors(validate(FormData));
-
-        dispatch({ type: "GET_USER_AUTH", data });
+        dispatch({type: "GET_USER_AUTH", data});
+        
         navigate("/home");
+        
       } catch (error) {
         setAlertt(true);
         setAlert(error.response.data.message);
@@ -165,13 +169,11 @@ const SignUp = () => {
 
   useEffect(() => {
     const user = localStorage.getItem("profile");
-    console.log("user", user);
     if (!user) {
       setIsSignUp(true);
     }
 
     if (Object.keys(FormErrors).length === 0 && isSubmit) {
-      console.log(FormData);
     }
   }, [FormErrors]);
 
@@ -192,7 +194,7 @@ const SignUp = () => {
                     <li></li>
                     <li></li>
             </ul>
-      <Paper elevation={20} style={paperStyle}>
+     {!isLoading ? <Paper elevation={20} style={paperStyle}>
         <Grid align="center">
           <Avatar style={avatarStyle}></Avatar>
           <h2 style={headerStyle}>{isSignUp ? "Veriphy Sign Up" : "Veriphy Sign In"}</h2>
@@ -204,7 +206,7 @@ const SignUp = () => {
           </Typography>
         </Grid>
 
-        <form onSubmit={handleSubmit} style={{ textAlign: "center" }}>
+       <form onSubmit={handleSubmit} style={{ textAlign: "center" }}>
           {isSignUp && (
             <>
               <TextField
@@ -318,7 +320,7 @@ const SignUp = () => {
             </Grid>
           </Grid>
         </form>
-      </Paper>
+      </Paper>: <CircularStatic />}
     </Grid>
   );
 };

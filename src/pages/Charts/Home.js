@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import { BsCurrencyDollar } from "react-icons";
 import { GoPrimitiveDot } from "react-icons/go";
 import { Stacked, Pie, Button, SparkLine } from "../../components";
@@ -9,25 +9,44 @@ import {
 } from "../../data/dummy";
 import Header from "../../components/Dashboard/header";
 import { useNavigate } from 'react-router-dom';
+import SimpleDialogDemo from "../../components/ModalIntro/ModalIntro";
+import { useSelector } from "react-redux";
 
 
 function Home() {
   const user = localStorage.getItem('profile')
+
   const navigate = useNavigate()
   const userUsed = JSON.parse(user)
+  const closed = useSelector((state) => state.closedDialog)
   const name = "name"
+
+  const [open, setOpen] = useState(true)
+  // const timesClosed = localStorage.setItem('closedDialog', closedDialog)
+  const timesC = localStorage.getItem('closedDialogggg')
+  console.log('timeC', timesC)
+
+
+
+
+
 
 
   useEffect(() => {
     if(!user){
       navigate('/')
     }
-    console.log(userUsed[name])
+    // if(timesC === false){
+    //   setOpen(false)
+    // }
+    
   })
+  console.log('closed', closed)
+
   return (
     <div className="mt-12">
        <Header /> 
-       <p style={{marginTop: 100, textAlign: 'center'}}>Welcome {userUsed[name]}</p>
+       <p style={{marginTop: 100, textAlign: 'center', fontWeight: 'bold'}}>Welcome {userUsed[name]}</p>
 
       <div className="flex flex-wrap lg:flex-nowrap justify-center">
 
@@ -51,6 +70,8 @@ function Home() {
           </div>
         </div>
         <div className="flex m-3 flex-wrap justify-center gap-1 items-center">
+
+         
           {earningData.map((item) => (
             <div
               key={item.title}
@@ -75,6 +96,7 @@ function Home() {
         </div>
       </div>
       <div className="flex gap-10 flex-wrap justify-center">
+        {timesC !== null && <SimpleDialogDemo open={open} setOpen={setOpen}/>}
         <div className="bg-white dark:text-gray-200 dark:bg-secondary-dark-bg m-3 p-4 rounded-2xl md:w-780">
           <div className="flex justify-between">
             <p className="font-semibold text-xl">Revenue Updates</p>

@@ -89,7 +89,6 @@ export default function Dashboard() {
     // ...
   ]
   const handleClickOpen = () => {
-    console.log('i was reached')
    setOpen(true)
    setShowDialog(true)
 
@@ -109,12 +108,10 @@ export default function Dashboard() {
   //   )
   // }
 
-  console.log('hello')
 
 
   const deleteUsers = async (id) => {
     const del = await deleteUser(id)
-    console.log('delete', typeof del.data.message)
     setText(del.data.message)
     setAlert(true)
     setTimeout(() => {
@@ -128,13 +125,11 @@ export default function Dashboard() {
 
   }
 
-  console.log('textttt', text)
  
 
 
 // const DialogSlide = ({id}) => {
 //   results.filter(user => user._id === user._id)
-//   console.log('ID', id)
 // };
   
 
@@ -165,7 +160,6 @@ export default function Dashboard() {
 // );
 // }
 
-  console.log('open', open)
   useEffect(() => {
     if(!user){
       navigate('/')
@@ -186,8 +180,6 @@ export default function Dashboard() {
   }, [dispatch])
 
   if(!results) return null
-  console.log('resultsss', results)
-  console.log('showDialog', showDialog)
   return (
     <Grid container style={{display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh'}}>
     <Header />

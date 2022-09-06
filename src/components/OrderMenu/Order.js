@@ -67,7 +67,6 @@ export default function OrderMenus() {
 
   const OrderByName = async () => {
     const resp =  await FilterUserByName()
-    console.log('responsee', resp)
     dispatch({type: 'ORDER_BY_NAME', data: resp})
     handleClose()
   };
