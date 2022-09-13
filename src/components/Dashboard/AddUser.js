@@ -11,6 +11,8 @@ import {signUp, signIn} from '../Auth'
 import { Alert, Stack } from '@mui/material';
 
 
+
+
 const AddUser = () => {
 
     const [showPassword, setShowPassword] = useState(false)
@@ -122,6 +124,8 @@ const AddUser = () => {
     const avatarStyle = {backgroundColor: '#1bbd7e'}
     return (
         <Grid style={{backgroundColor: 'beige', height: '100vh', display: 'flex', justifyContent: 'center'}}>
+            
+
             <Paper elevation={20} style={paperStyle}>
                 <Grid align='center'>
                     <Avatar style={avatarStyle}>

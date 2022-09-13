@@ -24,6 +24,8 @@ import Slide from '@mui/material/Slide';
 import BasicAlerts from '../Alert/Alert';
 import { Alert } from '@mui/material';
 import Pie from '../../pages/Charts/Pie'
+import CircularStatic from "../../progress";
+
 
 
 
@@ -180,7 +182,7 @@ export default function Dashboard() {
   }, [dispatch])
 
   if(!results) return null
-  return (
+  return ( !results ? <CircularStatic /> :
     <Grid container style={{display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh'}}>
     <Header />
     <Grid style={{display: 'flex'}}>
@@ -230,6 +232,6 @@ export default function Dashboard() {
         </TableBody>
       </Table>
     </TableContainer>
-    </Grid>
-  );
+    </Grid>)
+  
 }
