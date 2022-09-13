@@ -117,6 +117,7 @@ export default function Dashboard() {
     setText(del.data.message)
     setAlert(true)
     setTimeout(() => {
+      console.log('hello')
     setAlert(false)
     
 
