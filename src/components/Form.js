@@ -159,6 +159,7 @@ const SignUp = () => {
   };
 
   const handleChange = (e) => {
+    
     const name = e.target.name;
     if (e.target.value.length > 0) {
     }
