@@ -168,6 +168,7 @@ const SignUp = () => {
   const switchMode = () => [setIsSignUp((prevIsSignUp) => !prevIsSignUp)];
 
   useEffect(() => {
+    console.log('test')
     const user = localStorage.getItem("profile");
     if (!user) {
       setIsSignUp(true);
