@@ -18,6 +18,8 @@ import hello from '../../data/hi.gif'
 import { useCallback } from 'react';
 import { setValue } from '@syncfusion/ej2/base';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from "react-router-dom";
+
 
 const messages = ['Welcome to Veriphy', 'A simple Admin Dashboard', 'Built using React and NodeJs'];
 const functions = ['View and Delete users in table', 'Add new Users', 'View stats in graphs'];
@@ -27,6 +29,8 @@ function SimpleDialog(props) {
   const { onClose, selectedValue, open, setOpen, setClosedDialog, setIsTrue } = props;
   const closeddd = useSelector((state) => state.closedDialog)
   const dispatch = useDispatch()
+  const navigate = useNavigate();
+
   
 
   const [data, setData] = useState([''])
@@ -47,7 +51,22 @@ function SimpleDialog(props) {
   
 
   const handleListItemClick = (value) => {
-    onClose(value);
+
+    if(value === 'View and Delete users in table'){
+
+      navigate('/user')
+      onClose(value)
+
+    }else if(value === 'Add new Users'){
+
+      navigate('/add')
+      onClose(value)
+
+
+    }else{
+      onClose(value)
+
+    }
   };
   const changeMessage = useCallback(() => {
     const index = Math.floor(Math.random() * messages.length)
