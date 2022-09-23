@@ -9,6 +9,7 @@ import {useDispatch} from 'react-redux'
 import { useNavigate } from 'react-router-dom';
 import {signUp, signIn} from '../Auth'
 import { Alert, Stack } from '@mui/material';
+import colab from '../../images/colab.png'
 
 
 
@@ -119,11 +120,11 @@ const AddUser = () => {
     }, [FormErrors])
 
 
-    const paperStyle = {padding: '30px 20px', width: 300, margin: "20px auto"}
+    const paperStyle = {padding: '30px 20px', width: 700, margin: "20px auto"}
     const headerStyle = {margin:0}
     const avatarStyle = {backgroundColor: '#1bbd7e'}
     return (
-        <Grid style={{backgroundColor: 'beige', height: '100vh', display: 'flex', justifyContent: 'center'}}>
+        <Grid style={{backgroundColor: 'beige', backgroundImage: `url(${colab})`, height: '100vh', display: 'flex', justifyContent: 'center'}}>
             
 
             <Paper elevation={20} style={paperStyle}>
