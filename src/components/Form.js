@@ -197,9 +197,11 @@ const SignUp = () => {
                     <li></li>
             </ul>
      {!isLoading ? <Paper elevation={20} style={paperStyle} >
-      
+        
 
        <form onSubmit={handleSubmit} style={{ textAlign: "center" }} className='login-box'>
+      <h1 className="animate-charcter" style={{fontFamily: "Nunito"}}>Welcome to veriphy</h1>
+
           {isSignUp && (
             <>
               <TextField
