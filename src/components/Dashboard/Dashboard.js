@@ -189,13 +189,13 @@ export default function Dashboard() {
     <Grid style={{display: 'flex'}}>
       <Pie />
       </Grid>
-    <TableContainer component={Paper} style={{width: 700,marginTop: 82}} >
+    <TableContainer component={Paper} style={{width: 700,marginTop: 82}}   sx={{height: 500}}>
     <h2>Welcome {userUsed[name]}</h2>
     {alert && <BasicAlerts text={text} />}
     <Grid xs={12} lg={12} md={12} item>
         <SearchApp xs={12} setSearchTerm={setSearchTerm} searchTerm={searchTerm} />
       </Grid>
-      <Table sx={{ minWidth: 500 }} aria-label="customized table">
+      <Table sx={{ minWidth: 500}} aria-label="customized table">
         <TableHead>
           <TableRow>
             <StyledTableCell>Users </StyledTableCell>
