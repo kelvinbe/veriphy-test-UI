@@ -194,19 +194,10 @@ const SignUp = () => {
                     <li></li>
                     <li></li>
             </ul>
-     {!isLoading ? <Paper elevation={20} style={paperStyle}>
-        <Grid align="center">
-          <Avatar style={avatarStyle}></Avatar>
-          <h2 style={headerStyle}>{isSignUp ? "Veriphy Sign Up" : "Veriphy Sign In"}</h2>
-          <Typography gutterBottom variant="caption">
-            {isSignUp
-              ? "Please fill this form to create an account"
-              : "Please Sign In"}
-            {alertt && <p style={{ color: "red", fontSize: 12 }}>{alert}</p>}
-          </Typography>
-        </Grid>
+     {!isLoading ? <Paper elevation={20} style={paperStyle} >
+      
 
-       <form onSubmit={handleSubmit} style={{ textAlign: "center" }}>
+       <form onSubmit={handleSubmit} style={{ textAlign: "center" }} className='login-box'>
           {isSignUp && (
             <>
               <TextField
