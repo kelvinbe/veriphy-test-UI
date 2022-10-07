@@ -53,16 +53,11 @@ function SimpleDialog(props) {
   const handleListItemClick = (value) => {
 
     if(value === 'View and Delete users in table'){
-
       navigate('/user')
       onClose(value)
-
     }else if(value === 'Add new Users'){
-
       navigate('/add')
       onClose(value)
-
-
     }else{
       onClose(value)
 
