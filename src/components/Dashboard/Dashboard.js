@@ -133,7 +133,7 @@ export default function Dashboard() {
   const handleToggle = () => {
 
     setToggle(!toggle)
-    console.log('toggle')
+    console.log('toggle!')
 
   }
 
