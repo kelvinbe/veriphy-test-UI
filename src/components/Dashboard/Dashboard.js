@@ -25,6 +25,7 @@ import BasicAlerts from '../Alert/Alert';
 import { Alert } from '@mui/material';
 import Pie from '../../pages/Charts/Pie'
 import CircularStatic from "../../progress";
+import CachedIcon from '@mui/icons-material/Cached';
 
 
 
@@ -69,6 +70,7 @@ export default function Dashboard() {
   const [open, setOpen] = useState(false);
   const [text, setText] = useState('')
   const [alert, setAlert] = useState(false)
+  const [toggle, setToggle] = useState(false)
   const userUsed = JSON.parse(user)
   const name = "name"
   const steps = [
@@ -125,6 +127,12 @@ export default function Dashboard() {
     const users = await getUsers()
     dispatch({type: 'GET_USERS', data: users})
 
+
+  }
+
+  const handleToggle = () => {
+
+    setToggle(!toggle)
 
   }
 
@@ -187,9 +195,11 @@ export default function Dashboard() {
     <Grid container style={{display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh'}}>
     <Header />
     <Grid style={{display: 'flex'}}>
-      <Pie />
+      <Button style={{backgroundColor: 'blue'}} onClick={handleToggle}>
+          <CachedIcon style={{backgroundColor: 'blue'}} />
+        </Button>
       </Grid>
-    <TableContainer component={Paper} style={{width: 700,marginTop: 82}}   sx={{height: 500}}>
+   { !toggle ?  <TableContainer component={Paper} style={{width: 700,marginTop: 82, marginLeft: 20}}   sx={{height: 500}}>
     <h2>Welcome {userUsed[name]}</h2>
     {alert && <BasicAlerts text={text} />}
     <Grid xs={12} lg={12} md={12} item>
@@ -232,7 +242,7 @@ export default function Dashboard() {
           )): <div style={{display: 'flex', justifyContent: 'center'}}>No users! Head to Add User to populate table</div>}
         </TableBody>
       </Table>
-    </TableContainer>
+    </TableContainer> : <Pie />}
     </Grid>)
   
 }
