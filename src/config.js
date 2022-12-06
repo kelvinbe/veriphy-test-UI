@@ -4,5 +4,5 @@ import axios from 'axios'
 
 
 export const axiosInstance = axios.create({
-    baseURL:"https://veruser.herokuapp.com/"
+    baseURL:"https://veriphy-api.onrender.com"
 })
