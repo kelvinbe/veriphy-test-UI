@@ -133,7 +133,6 @@ export default function Dashboard() {
   const handleToggle = () => {
 
     setToggle(!toggle)
-    console.log('toggle!')
 
   }
 
@@ -192,7 +191,7 @@ export default function Dashboard() {
   }, [dispatch])
 
   if(!results) return null
-  return ( !results ? <CircularStatic /> :
+  return (!results ? <CircularStatic /> :
     <Grid container style={{display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh'}}>
     <Header />
     <Grid style={{display: 'flex'}}>
@@ -200,7 +199,7 @@ export default function Dashboard() {
           <CachedIcon style={{backgroundColor: 'blue'}} />
         </Button>
       </Grid>
-   { !toggle ?  <TableContainer component={Paper} style={{width: 700,marginTop: 82, marginLeft: 20}}   sx={{height: 500}}>
+   {!toggle ?  <TableContainer component={Paper} style={{width: 700,marginTop: 82, marginLeft: 20}}   sx={{height: 500}}>
     <h2>Welcome {userUsed[name]}</h2>
     {alert && <BasicAlerts text={text} />}
     <Grid xs={12} lg={12} md={12} item>
